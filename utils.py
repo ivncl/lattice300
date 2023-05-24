@@ -464,60 +464,22 @@ def BuildLattice(V,E,BoundGeom,DiamLaw,meshsize,prefix):
                                                       VECurr1[1]-VECurr0[1], \
                                                           VECurr1[2]-VECurr0[2], \
                                                               DCurr0/2,DCurr1/2) )
-        cylis.append(cyl)
-        # cond1=np.any((VVVcurr==VECurr0).all(axis=1))
-        # cond2=np.any((VVVcurr==VECurr1).all(axis=1))
-        # print(len(VVVcurr),cond1,cond2)
-        # if cond1==0:
-            # sph1 = (3, gmsh.model.occ.addSphere(VECurr0[0],VECurr0[1],VECurr0[2], .51*DCurr0 ) )
-            # cylis.append(sph1)
-        # if cond2==0:
-            # sph2 = (3, gmsh.model.occ.addSphere(VECurr1[0],VECurr1[1],VECurr1[2], .51*DCurr0 ) )
-            # cylis.append(sph2)
-        # VVVcurr=np.unique(np.r_[np.r_[VVVcurr,np.reshape(VECurr0,(1,3))],np.reshape(VECurr1,(1,3))], axis=0)
-    # VVV=np.unique(np.r_[V0,V1], axis=0)
-    # print(VVV)
-    # Nv=len(VVV)
-    # Rangev=range(0,Nv)
-    # for i in Rangev:
-    #     radius=.51*DiamLaw(VVV[i][0],VVV[i][1],VVV[i][2])
-    #     print(radius)
-    #     cyl = (3, gmsh.model.occ.addSphere(VVV[i][0],VVV[i][1],VVV[i][2], radius ) )
-    #     cylis.append(cyl)
-    # Rangeebound=range(0,len(modstruts))
-    # for ii in Rangeebound:
-    #     cond=np.where(Eids==modstruts[ii][0][1])
-    #     i=cond[0][0]
-    #     DCurr0=DD[i][0]
-    #     DCurr1=DD[i][1]
-    #     point=modstrutspoints[ii]
-    #     VECurr0=V0[i]
-    #     VECurr1=V1[i]
-    #     if point==0:
-    #         sph = (3, gmsh.model.occ.addSphere(VECurr0[0],VECurr0[1],VECurr0[2], \
-    #                                                           DCurr0/2*1.01) )
-    #     else:
-    #         sph = (3, gmsh.model.occ.addSphere(VECurr1[0],VECurr1[1],VECurr1[2], \
-    #                                                           DCurr1/2*1.01) )
-    #     cylis.append(sph)    
-    # try:
-        # outDimTags, outDimTagsMap = gmsh.model.occ.fuse(cylis[:len(cylis)//2],cylis[len(cylis)//2:])
-    # except:
-        # print('Boolean union or boundary cut failed. :-(')
+        cylis.append(cyl) 
+    try:
+        outDimTags, outDimTagsMap = gmsh.model.occ.fuse(cylis[:len(cylis)//2],cylis[len(cylis)//2:])
+    except:
+        print('Boolean union or boundary cut failed. :-(')
     gmsh.model.occ.synchronize()
     print('Write geometry.')
     gmsh.write(prefix + 'lattice.brep') 
     gmsh.write(prefix + 'lattice.step') 
     print('Generating and optimizing mesh.')
-    # gmsh.model.mesh.generate(3)    
-    # gmsh.model.mesh.optimize(method = "Netgen", force = False, niter = 20, dimTags = [] )  
-    # print('Write meshes.')
-    # gmsh.write(prefix + 'lattice.stl')
-    # gmsh.write(prefix + 'lattice.msh')
-    # gmsh.write(prefix + 'lattice.key')    
+    gmsh.model.mesh.generate(3)    
+    gmsh.model.mesh.optimize(method = "Netgen", force = False, niter = 20, dimTags = [] )  
+    print('Write meshes.')
+    gmsh.write(prefix + 'lattice.stl')
+    gmsh.write(prefix + 'lattice.msh')
+    gmsh.write(prefix + 'lattice.key')    
     ##############
     # gmsh.fltk.run()
     gmsh.finalize
-    
-    # return volume
-
