@@ -1,6 +1,6 @@
 Python code to generate geometry files and high-quality tetrahedral meshes of Voronoi and Delaunay 3D reticula.
 
-Supported lattices are now stochastic Voronoi and Delanuay "perfect" reticula. 
+Supported lattices are now stochastic Voronoi and Delaunay "perfect" reticula. 
 Sampling is computed trhough the Poisson Disk Algorithm, adapted to support arbitrary density function of minimum distance. Arbitrary function for strut diameter is supported as well. 
 
 Dependencies:
