@@ -1,7 +1,9 @@
-Python code to generate geometry files and high-quality tetrahedral meshes of Voronoi and Delaunay 3D reticula.
+Python code to generate geometry files and high-quality tetrahedral meshes of Voronoi and Delaunay 3D reticula. 
 
 Supported lattices are now stochastic Voronoi and Delaunay "perfect" reticula. 
-Sampling is computed through the Poisson Disk Algorithm, adapted to support arbitrary density functions of minimum distance. Arbitrary function for strut diameter is supported as well. 
+Sampling is computed through the Poisson Disk Algorithm, adapted to support arbitrary density functions of minimum distance. Arbitrary function for strut diameter is supported as well. The gometries may be bounded by any shape (to be imported as .stl file), but to date a cuboid is the most efficient.
+
+If using this code, especially for research purposes, kindly cite the [related scientific paper](https://www.sciencedirect.com/science/article/pii/S0020768323003980).
 
 Dependencies:
 gmsh
